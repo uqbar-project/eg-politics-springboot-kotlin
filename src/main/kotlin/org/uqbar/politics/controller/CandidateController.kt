@@ -1,5 +1,6 @@
 package org.uqbar.politics.controller
 
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,26 +10,29 @@ import org.uqbar.politics.domain.Candidate
 import org.uqbar.politics.repository.CandidateRepository
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = ["*"], methods = [RequestMethod.PUT, RequestMethod.GET])
 class CandidateController {
 
     @Autowired
     private lateinit var candidateRepository: CandidateRepository
 
-    @GetMapping("/candidatos/{id}")
-    fun getCandidato(@PathVariable id: Long) {
-        this.candidateRepository.findById(id)
+    @GetMapping("/candidates/{id}")
+    @ApiOperation("Permite conocer los datos de una persona candidata en base al identificador.")
+    fun getCandidate(@PathVariable id: Long): Candidate {
+        return this.candidateRepository.findById(id).orElseThrow({ ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador " + id + " no existe") })
     }
 
-    @PutMapping("/candidatos/{id}")
-    fun actualizarCandidato(@RequestBody candidatoNuevo: Candidate, @PathVariable id: Long): ResponseEntity<String> {
-
+    @PutMapping("/candidates/{id}")
+    @ApiOperation("Permite actualizar las promesas o los votos de una persona candidata.")
+    fun actualizarCandidato(@RequestBody candidateNuevo: Candidate, @PathVariable id: Long): ResponseEntity<String> {
         candidateRepository
             .findById(id)
             .map { candidate ->
                 // solo modificamos lo que está disponible para cambiar en la aplicación
-                candidate.actualizarPromesas(candidatoNuevo.promesas ?: emptyList())
-                candidate.votos = candidatoNuevo.votos
+                candidate.actualizarPromesas(candidateNuevo.promesas ?: emptyList())
+                if (candidateNuevo.votos > 0) {
+                    candidate.votos = candidateNuevo.votos
+                }
                 candidateRepository.save(candidate)
             }
             .orElseThrow{

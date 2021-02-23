@@ -16,7 +16,7 @@ class ZonaParaGrillaSerializer : StdSerializer<Zona>(Zona::class.java) {
         }
         gen.writeStringField("descripcion", zona.descripcion)
         val candidatosDTO = zona.candidates.map { CandidatoPlanoDTO(it) }
-        gen.writeObjectField("candidatos", candidatosDTO.toList())
+        gen.writeObjectField("candidates", candidatosDTO.toList())
         gen.writeEndObject()
     }
 
