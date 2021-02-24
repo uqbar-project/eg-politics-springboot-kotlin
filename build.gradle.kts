@@ -55,6 +55,7 @@ tasks.jacocoTestReport {
 
 jacoco {
     toolVersion = "0.8.6"
+    reportsDir = file("$buildDir/reports/jacoco")
 }
 
 tasks.jacocoTestReport {
