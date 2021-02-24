@@ -11,7 +11,7 @@ before_install:
   - chmod +x gradle/wrapper/gradle-wrapper.jar
 
 script:
-  - ./gradlew test build -i
+  - ./gradlew test build -i --stacktrace
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
