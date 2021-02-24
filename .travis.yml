@@ -3,6 +3,9 @@ language: java
 jdk:
   - oraclejdk11
 
+env:
+  - CODECOV_TOKEN="95218ca4-e87d-4593-adc3-a7da34ac68e0"
+
 before_install:
   - chmod +x gradlew
   - chmod +x gradle/wrapper/gradle-wrapper.jar
