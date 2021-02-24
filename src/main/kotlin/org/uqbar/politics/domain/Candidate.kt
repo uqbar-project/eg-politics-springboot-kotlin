@@ -18,11 +18,11 @@ class Candidate {
 
     @OneToMany(fetch=FetchType.LAZY, cascade= [CascadeType.ALL])
     @OrderColumn
-    val promesas = mutableListOf<Promesa>()
+    var promesas = mutableListOf<Promesa>()
 
     @ElementCollection
     @OrderColumn
-    val opiniones = mutableListOf<String>()
+    var opiniones = mutableListOf<String>()
 
     fun validar() {
         if (nombre.trim().equals("")) {
@@ -50,5 +50,14 @@ class Candidate {
 
     fun agregarOpinion(opinion: String) {
         opiniones.add(opinion)
+    }
+
+    fun votar() {
+        votos++
+    }
+
+    fun reset() {
+        promesas = mutableListOf()
+        opiniones = mutableListOf()
     }
 }

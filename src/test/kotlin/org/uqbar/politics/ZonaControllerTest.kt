@@ -24,7 +24,7 @@ data class CandidateGrillaDTO(var id: Long, var partido: String, var nombre: Str
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @DisplayName("Dado un controller de zonas")
-class ZonasControllerTest {
+class ZonaControllerTest {
     private val mapper = jacksonObjectMapper()
 
     @Autowired
