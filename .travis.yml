@@ -15,3 +15,6 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+after_failure:
+  - cat /home/travis/build/uqbar-project/eg-politics-springboot-kotlin/build/reports/tests/test/index.html
