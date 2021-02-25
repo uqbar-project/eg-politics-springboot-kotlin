@@ -1,7 +1,7 @@
-language: kotlin
+language: java
 
 jdk:
-  - oraclejdk11
+  - oraclejdk14
 
 env:
   - CODECOV_TOKEN="95218ca4-e87d-4593-adc3-a7da34ac68e0"
@@ -11,7 +11,7 @@ before_install:
   - chmod +x gradle/wrapper/gradle-wrapper.jar
 
 script:
-  - ./gradlew test build -i --stacktrace
+  - ./gradlew test build --warning-mode all
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
