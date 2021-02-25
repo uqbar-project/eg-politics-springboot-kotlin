@@ -14,8 +14,6 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.uqbar.politics.domain.Zona
 import org.uqbar.politics.repository.ZonaRepository
-import org.uqbar.politics.serializers.CandidatoPlanoDTO
-import org.uqbar.politics.serializers.ZonaParaGrillaSerializer
 
 data class ZonaGrillaDTO(var id: Long, var descripcion: String, var candidates: List<CandidateGrillaDTO>) {}
 data class CandidateGrillaDTO(var id: Long, var partido: String, var nombre: String, var votos: Int) {}
@@ -46,7 +44,7 @@ class ZonaControllerTest {
 
     @Test
     @DisplayName("al traer el dato de una zona trae las personas candidatas también")
-    fun zonasConMaterias() {
+    fun zonaConCandidates() {
         val zonas = repoZonas.findAll().toList()
         assert(!zonas.isEmpty(), { "No hay zonas cargadas en el sistema" })
         val ID_ZONA = zonas.first().id

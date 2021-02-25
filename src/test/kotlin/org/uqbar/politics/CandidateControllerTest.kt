@@ -37,10 +37,15 @@ class CandidateControllerTest {
         candidate.reset()
         candidate.votar()
         val responseEntity = mockMvc.perform(
-            MockMvcRequestBuilders.put("/candidates")
+            MockMvcRequestBuilders.put("/candidates/" + candidate.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(candidate))
         ).andReturn().response
+
+        assertEquals(200, responseEntity.status)
+
+        val candidateActualizado = repoCandidates.findByNombre(CANDIDATE_NOMBRE).get()
+        assertEquals(1, candidateActualizado.votos)
 
         // Pero ojo, como esto tiene efecto colateral, vamos a volver atrás el cambio
         candidate.votos = 0

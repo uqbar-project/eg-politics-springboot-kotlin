@@ -9,15 +9,17 @@ import java.io.IOException
 class ZonaParaGrillaSerializer : StdSerializer<Zona>(Zona::class.java) {
 
     @Throws(IOException::class)
-    override fun serialize(zona: Zona, gen: JsonGenerator, provider: SerializerProvider) {
-        gen.writeStartObject()
-        if (zona.id !== null) {
-            gen.writeNumberField("id", zona.id!!)
+    override fun serialize(zona: Zona, generator: JsonGenerator, provider: SerializerProvider) {
+        with (generator) {
+            writeStartObject()
+            if (zona.id !== null) {
+                writeNumberField("id", zona.id!!)
+            }
+            writeStringField("descripcion", zona.descripcion)
+            val candidatosDTO = zona.candidates.map { CandidatoPlanoDTO(it) }
+            writeObjectField("candidates", candidatosDTO.toList())
+            writeEndObject()
         }
-        gen.writeStringField("descripcion", zona.descripcion)
-        val candidatosDTO = zona.candidates.map { CandidatoPlanoDTO(it) }
-        gen.writeObjectField("candidates", candidatosDTO.toList())
-        gen.writeEndObject()
     }
 
 }
