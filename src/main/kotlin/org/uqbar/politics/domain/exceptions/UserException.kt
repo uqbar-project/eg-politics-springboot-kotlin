@@ -1,5 +1,5 @@
 package org.uqbar.politics.domain.exceptions
 
-class UserException(message: String) : Throwable() {
+import java.lang.RuntimeException
 
-}
+class UserException(message: String) : RuntimeException(message)

@@ -25,7 +25,7 @@ class Candidate {
     var opiniones = mutableListOf<String>()
 
     fun validar() {
-        if (nombre.trim().equals("")) {
+        if (nombre.trim() == "") {
             throw UserException("Debe ingresar descripcion")
         }
         if (partido === null) {
@@ -33,16 +33,14 @@ class Candidate {
         }
     }
 
-    override fun toString(): String {
-        return nombre
-    }
+    override fun toString(): String = nombre
 
     fun agregarPromesa(nuevaPromesa: String) {
         promesas.add(Promesa(nuevaPromesa))
     }
 
     fun actualizarPromesas(nuevasPromesas: List<Promesa>) {
-        if (!nuevasPromesas.isEmpty()) {
+        if (nuevasPromesas.isNotEmpty()) {
             promesas.clear()
             promesas.addAll(nuevasPromesas)
         }

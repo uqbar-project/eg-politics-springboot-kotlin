@@ -24,9 +24,7 @@ class ZonaController {
 
     @GetMapping("/zonas")
     @ApiOperation("Devuelve todas las zonas de votación")
-    fun getZonas(): List<ZonaPlanaDTO> {
-        return this.zonaRepository.findAll().map { zona -> ZonaPlanaDTO(zona.id!!, zona.descripcion) }
-    }
+    fun getZonas(): List<ZonaPlanaDTO> = zonaRepository.findAll().map { zona -> ZonaPlanaDTO(zona.id!!, zona.descripcion) }
 
     @GetMapping("/zonas/{id}")
     @ApiOperation("Muestra la información de una zona de votación con sus candidates")
@@ -38,15 +36,12 @@ class ZonaController {
         return zonaRepository
             .findById(id)
             .orElseThrow {
-                throw ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "La zona con identificador " + id + " no existe"
-                )
+                ResponseStatusException(HttpStatus.NOT_FOUND, "La zona con identificador $id no existe")
             }
     }
 
     companion object {
-        val mapper = ObjectMapper()
+        val mapper: ObjectMapper = ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
             .configure(SerializationFeature.INDENT_OUTPUT, true)

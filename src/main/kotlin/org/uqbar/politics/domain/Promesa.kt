@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class Promesa {
+class Promesa(@Column(length = 255) var accionPrometida: String = "") {
 
     @Id @GeneratedValue
     var id: Long? = null
@@ -16,19 +16,8 @@ class Promesa {
     @Column
     var fecha: LocalDate = LocalDate.now()
 
-    @Column(length=255)
-    lateinit var accionPrometida: String
-
-    // constructor necesario para JPA / Hibernate
-    constructor() {
-    }
-
-    constructor(accionPrometida: String) {
-        this.accionPrometida = accionPrometida
-    }
-
     fun validar() {
-        if (accionPrometida.trim().equals("")) {
+        if (accionPrometida.trim() == "") {
             throw UserException("Debe ingresar una acción en la promesa")
         }
     }

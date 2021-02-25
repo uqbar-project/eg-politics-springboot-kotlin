@@ -27,7 +27,7 @@ class CandidateControllerTest {
     @Autowired
     lateinit var repoCandidates: CandidateRepository
 
-    val CANDIDATE_NOMBRE = "Julio Sosa"
+    private val CANDIDATE_NOMBRE = "Julio Sosa"
 
     @Test
     @DisplayName("podemos actualizar la información de una persona candidata")

@@ -32,8 +32,6 @@ class Zona {
         }
     }
 
-    override fun toString(): String {
-        return descripcion
-    }
+    override fun toString(): String = descripcion
 
 }

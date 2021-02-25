@@ -18,9 +18,10 @@ class CandidateController {
 
     @GetMapping("/candidates/{id}")
     @ApiOperation("Permite conocer los datos de una persona candidata en base al identificador.")
-    fun getCandidate(@PathVariable id: Long): Candidate {
-        return this.candidateRepository.findById(id).orElseThrow({ ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador " + id + " no existe") })
-    }
+    fun getCandidate(@PathVariable id: Long): Candidate =
+        candidateRepository.findById(id).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador $id no existe")
+        }
 
     @PutMapping("/candidates/{id}")
     @ApiOperation("Permite actualizar las promesas o los votos de una persona candidata.")
@@ -35,8 +36,8 @@ class CandidateController {
                 }
                 candidateRepository.save(candidate)
             }
-            .orElseThrow{
-                throw ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador " + id + " no existe")
+            .orElseThrow {
+                ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador $id no existe")
             }
 
         return ResponseEntity.ok().body("El candidato fue actualizado correctamente")

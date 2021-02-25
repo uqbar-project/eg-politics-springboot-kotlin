@@ -33,9 +33,7 @@ abstract class Partido {
         }
     }
 
-    override fun toString(): String {
-        return nombre
-    }
+    override fun toString(): String = nombre
 
 }
 
