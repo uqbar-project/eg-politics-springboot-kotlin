@@ -15,9 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.uqbar.politics.domain.Zona
 import org.uqbar.politics.repository.ZonaRepository
 
-data class ZonaGrillaDTO(var id: Long, var descripcion: String, var candidates: List<CandidateGrillaDTO>)
-data class CandidateGrillaDTO(var id: Long, var partido: String, var nombre: String, var votos: Int)
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -50,7 +47,7 @@ class ZonaControllerTest {
         val ID_ZONA = zonas.first().id
         val responseEntity = mockMvc.perform(MockMvcRequestBuilders.get("/zonas/$ID_ZONA")).andReturn().response
         assertEquals(200, responseEntity.status)
-        val zona = mapper.readValue<ZonaGrillaDTO>(responseEntity.contentAsString)
+        val zona = mapper.readValue<Zona>(responseEntity.contentAsString)
         assert(zona.candidates.isNotEmpty()) { "La zona debería tener candidates" }
     }
 

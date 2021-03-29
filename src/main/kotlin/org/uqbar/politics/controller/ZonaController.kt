@@ -1,5 +1,6 @@
 package org.uqbar.politics.controller
 
+import com.fasterxml.jackson.annotation.JsonView
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 import org.uqbar.politics.domain.Zona
 import org.uqbar.politics.repository.ZonaRepository
+import org.uqbar.politics.serializers.View
 import org.uqbar.politics.serializers.ZonaParaGrillaSerializer
 import org.uqbar.politics.serializers.ZonaPlanaDTO
 
@@ -24,10 +26,25 @@ class ZonaController {
 
     @GetMapping("/zonas")
     @ApiOperation("Devuelve todas las zonas de votación")
-    fun getZonas(): List<ZonaPlanaDTO> = zonaRepository.findAll().map { zona -> ZonaPlanaDTO(zona.id!!, zona.descripcion) }
+    @JsonView(View.Zona.Grilla::class)
+    /*
+     Alternativa con DTO
+
+     fun getZonas(): List<ZonaPlanaDTO> = zonaRepository.findAll().map { zona -> ZonaPlanaDTO(zona.id!!, zona.descripcion) }
+    * */
+    fun getZonas(): Iterable<Zona> = zonaRepository.findAll()
 
     @GetMapping("/zonas/{id}")
     @ApiOperation("Muestra la información de una zona de votación con sus candidates")
+    @JsonView(View.Zona.Plana::class)
+    fun getZona(@PathVariable id: Long): Zona = zonaRepository
+        .findById(id)
+        .orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "La zona con identificador $id no existe")
+        }
+ /*
+    Alteernativa con serializadores
+
     fun getZona(@PathVariable id: Long): Zona {
         mapper.registerModule(
             SimpleModule().addSerializer(ZonaParaGrillaSerializer())
@@ -38,7 +55,8 @@ class ZonaController {
             .orElseThrow {
                 ResponseStatusException(HttpStatus.NOT_FOUND, "La zona con identificador $id no existe")
             }
-    }
+    }*/
+
 
     companion object {
         val mapper: ObjectMapper = ObjectMapper()

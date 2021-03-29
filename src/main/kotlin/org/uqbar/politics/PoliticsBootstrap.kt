@@ -42,20 +42,23 @@ class PoliticsBootstrap : InitializingBean {
     private lateinit var springfield: Zona
 
     fun initPartidos() {
-        frejuli = Peronista()
-        frejuli.afiliados = 60000
-        frejuli.nombre = "FREJULI"
-        frejuli.populista = true
+        frejuli = Peronista().apply {
+            afiliados = 60000
+            nombre = "FREJULI"
+            populista = true
+        }
 
-        perone = Peronista()
-        perone.afiliados = 5000
-        perone.nombre = "Perone"
-        perone.populista = false
+        perone = Peronista().apply {
+            afiliados = 5000
+            nombre = "Perone"
+            populista = false
+        }
 
-        prime = Preservativo()
-        prime.afiliados = 1200
-        prime.nombre = "PRIME"
-        prime.fechaCreacion = LocalDate.parse("2009-06-16")
+        prime = Preservativo().apply {
+            afiliados = 1200
+            nombre = "PRIME"
+            fechaCreacion = LocalDate.parse("2009-06-16")
+        }
 
         this.crearPartidos(frejuli)
         this.crearPartidos(perone)
@@ -72,42 +75,49 @@ class PoliticsBootstrap : InitializingBean {
     }
 
     fun initCandidatos() {
-        sosa = Candidate()
-        sosa.nombre = "Julio Sosa"
-        sosa.partido = frejuli
-        sosa.agregarPromesa("Terminar con la inseguridad")
-        sosa.agregarPromesa("Aborto para unos, banderitas para otros")
-        benitez = Candidate()
-        benitez.nombre = "Myriam Benitez"
-        benitez.partido = frejuli
-        benitez.agregarPromesa("Girar y girar hacia la libertad")
-        yapura = Candidate()
-        yapura.nombre = "Marcelo Yapura"
-        yapura.partido = frejuli
-        yapura.agregarPromesa("Terminar con la pobreza")
-        yapura.agregarPromesa("Que todos los docentes de la UTN cobren en euros")
-        ramos = Candidate()
-        ramos.nombre = "Manuel Ramos"
-        ramos.partido = perone
-        ramos.agregarPromesa("Terminar con la inseguridad")
-        ramos.agregarPromesa("Recuperar la confianza de los argentinos")
-        monti = Candidate()
-        monti.nombre = "Yaco Monti"
-        monti.partido = perone
-        monti.agregarPromesa("Terminar con la inseguridad")
-        monti.agregarPromesa("Recuperar la dignidad")
-        rota = Candidate()
-        rota.nombre = "Nino Rota"
-        rota.partido = prime
-        rota.agregarPromesa("Ganarle a la pobreza")
-        rota.agregarPromesa("Sacar el cepo a la moneda extranjera")
-        rota.agregarPromesa("Eliminar el impuesto a las ganancias")
-        cafrune = Candidate()
-        cafrune.nombre = "Yamila Cafrune"
-        cafrune.partido = prime
-        cafrune.agregarPromesa("Que vuelva Futbol para Todos")
-        cafrune.agregarPromesa("Estatizar las empresas privadas")
-        cafrune.agregarPromesa("Pesificar la economia")
+        sosa = Candidate().apply {
+            nombre = "Julio Sosa"
+            partido = frejuli
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Aborto para unos, banderitas para otros")
+        }
+        benitez = Candidate().apply {
+            nombre = "Myriam Benitez"
+            partido = frejuli
+            agregarPromesa("Girar y girar hacia la libertad")
+        }
+        yapura = Candidate().apply {
+            nombre = "Marcelo Yapura"
+            partido = frejuli
+            agregarPromesa("Terminar con la pobreza")
+            agregarPromesa("Que todos los docentes de la UTN cobren en euros")
+        }
+        ramos = Candidate().apply {
+            nombre = "Manuel Ramos"
+            partido = perone
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Recuperar la confianza de los argentinos")
+        }
+        monti = Candidate().apply {
+            nombre = "Yaco Monti"
+            partido = perone
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Recuperar la dignidad")
+        }
+        rota = Candidate().apply {
+            nombre = "Nino Rota"
+            partido = prime
+            agregarPromesa("Ganarle a la pobreza")
+            agregarPromesa("Sacar el cepo a la moneda extranjera")
+            agregarPromesa("Eliminar el impuesto a las ganancias")
+        }
+        cafrune = Candidate().apply {
+            nombre = "Yamila Cafrune"
+            partido = prime
+            agregarPromesa("Que vuelva Futbol para Todos")
+            agregarPromesa("Estatizar las empresas privadas")
+            agregarPromesa("Pesificar la economia")
+        }
 
         this.crearCandidate(sosa)
         this.crearCandidate(benitez)
@@ -128,12 +138,14 @@ class PoliticsBootstrap : InitializingBean {
     }
 
     fun initZonas() {
-        nacional = Zona()
-        nacional.descripcion = "Elecciones nacionales"
-        nacional.candidates = hashSetOf(sosa, benitez, ramos, rota)
-        springfield = Zona()
-        springfield.descripcion = "Springfield"
-        springfield.candidates = hashSetOf(yapura, monti, cafrune)
+        nacional = Zona().apply {
+            descripcion = "Elecciones nacionales"
+            candidates = hashSetOf(sosa, benitez, ramos, rota)
+        }
+        springfield = Zona().apply {
+            descripcion = "Springfield"
+            candidates = hashSetOf(yapura, monti, cafrune)
+        }
         this.crearZona(nacional)
         this.crearZona(springfield)
     }
