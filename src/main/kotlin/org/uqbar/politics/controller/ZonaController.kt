@@ -26,7 +26,7 @@ class ZonaController {
 
     @GetMapping("/zonas")
     @ApiOperation("Devuelve todas las zonas de votación")
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Plana::class)
     /*
      Alternativa con DTO
 
@@ -36,7 +36,7 @@ class ZonaController {
 
     @GetMapping("/zonas/{id}")
     @ApiOperation("Muestra la información de una zona de votación con sus candidates")
-    @JsonView(View.Zona.Plana::class)
+    @JsonView(View.Zona.Grilla::class)
     fun getZona(@PathVariable id: Long): Zona = zonaRepository
         .findById(id)
         .orElseThrow {
