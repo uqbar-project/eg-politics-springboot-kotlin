@@ -1,4 +1,4 @@
-package org.uqbar.politics
+package org.uqbar.politics.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -29,8 +29,7 @@ class ZonaControllerTest {
     lateinit var repoZonas: ZonaRepository
 
     @Test
-    @DisplayName("las zonas solo traen los datos de primer nivel")
-    fun todasLasZonas() {
+    fun `las zonas solo traen los datos de primer nivel`() {
         val responseEntity = mockMvc.perform(MockMvcRequestBuilders.get("/zonas")).andReturn().response
         val zonas = mapper.readValue<List<Zona>>(responseEntity.contentAsString)
         assertEquals(200, responseEntity.status)
@@ -40,8 +39,7 @@ class ZonaControllerTest {
     }
 
     @Test
-    @DisplayName("al traer el dato de una zona trae las personas candidatas también")
-    fun zonaConCandidates() {
+    fun `al traer el dato de una zona trae las personas candidatas también`() {
         val zonas = repoZonas.findAll().toList()
         assert(zonas.isNotEmpty(), { "No hay zonas cargadas en el sistema" })
         val ID_ZONA = zonas.first().id

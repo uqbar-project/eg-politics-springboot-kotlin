@@ -1,4 +1,4 @@
-package org.uqbar.politics
+package org.uqbar.politics.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -30,8 +30,7 @@ class CandidateControllerTest {
     private val CANDIDATE_NOMBRE = "Julio Sosa"
 
     @Test
-    @DisplayName("podemos actualizar la información de una persona candidata")
-    fun actualizarProfesor() {
+    fun `podemos actualizar la información de una persona candidata`() {
         val candidate = repoCandidates.findByNombre(CANDIDATE_NOMBRE).get()
         assertEquals(0, candidate.votos)
         candidate.reset()
