@@ -62,6 +62,11 @@ class CandidateTest {
         Assertions.assertEquals(0, candidate.opiniones.size)
     }
 
+    @Test
+    fun `el toString de candidate es su nombre`() {
+        val candidate = candidateOk()
+        Assertions.assertEquals(candidate.nombre, candidate.toString())
+    }
 }
 
 fun candidateOk() = Candidate().apply {
