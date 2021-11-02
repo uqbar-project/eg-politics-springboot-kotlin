@@ -43,7 +43,7 @@ class ZonaController {
             ResponseStatusException(HttpStatus.NOT_FOUND, "La zona con identificador $id no existe")
         }
  /*
-    Alteernativa con serializadores
+    Alternativa con serializadores
 
     fun getZona(@PathVariable id: Long): Zona {
         mapper.registerModule(

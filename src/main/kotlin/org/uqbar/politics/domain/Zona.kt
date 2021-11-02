@@ -26,7 +26,7 @@ class Zona {
 
     @OneToMany(fetch=FetchType.LAZY)
     @JsonView(View.Zona.Grilla::class)
-    lateinit var candidates: MutableSet<Candidate>
+    var candidates: MutableSet<Candidate> = mutableSetOf()
 
     fun validar() {
         if (descripcion.trim() == "") {

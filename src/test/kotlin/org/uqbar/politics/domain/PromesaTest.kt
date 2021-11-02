@@ -13,6 +13,12 @@ class PromesaTest {
     fun `una promesa sin accion prometida o en blanco no pasa la validacion`() {
         assertThrows<UserException> { Promesa().validar() }
         assertThrows<UserException> { Promesa(accionPrometida = "").validar() }
+        assertThrows<UserException> { Promesa(accionPrometida = "   ").validar() }
+    }
+
+    @Test
+    fun `una promesa correctamente configurada pasa la validacion`() {
+        Promesa(accionPrometida = "Terminar con xxx").validar()
     }
 
     @Test
