@@ -58,7 +58,7 @@ class CandidateControllerTest {
 
     @Test
     @Transactional
-    fun `actualizar solo promesas`() {
+    fun `actualizar solo promesas para un candidato pisa las promesas anteriores y deja los votos como estaban`() {
         // ARRANGE
         // Creamos un candidato con 3 votos y 1 promesa
         val candidate = getCandidateDePrueba()
@@ -88,6 +88,18 @@ class CandidateControllerTest {
         val candidateModificado = repoCandidates.findById(candidate.id!!).orElseThrow { UserException("Candidate " + candidate.id + " no encontrado")}
         assertEquals("Promocionar a todes les alumnes", candidateModificado.promesas.first().accionPrometida)
         assertEquals(3, candidateModificado.votos)
+    }
+
+    @Test
+    @Transactional
+    fun `actualizar un candidate inexistente devuelve un codigo de http 404`() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.put("/candidates/3253532")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(Candidate().apply {
+                    agregarPromesa("Promocionar a todes les alumnes")
+                }))
+        ).andExpect(status().isNotFound)
     }
 
     @Test
