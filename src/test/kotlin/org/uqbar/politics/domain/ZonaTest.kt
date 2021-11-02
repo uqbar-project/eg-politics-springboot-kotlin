@@ -1,5 +1,6 @@
 package org.uqbar.politics.domain
 
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.uqbar.politics.domain.exceptions.UserException
@@ -13,12 +14,15 @@ class ZonaTest {
 
     @Test
     fun `una zona sin candidates no pasa la validacion`() {
-        assertThrows<UserException> { Zona().apply { descripcion = "Zona" }.validar() }
+        assertThrows<UserException> { Zona().apply {
+            descripcion = "Zona"
+            candidates = mutableSetOf()
+        }.validar() }
     }
 
     @Test
     fun `una zona inicialmente no tiene identificador`() {
-        assertThrows<UserException> { zonaOk().validar() }
+        assertNull(zonaOk().id)
     }
 }
 
