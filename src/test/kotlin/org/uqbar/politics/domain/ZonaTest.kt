@@ -1,5 +1,6 @@
 package org.uqbar.politics.domain
 
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -23,6 +24,12 @@ class ZonaTest {
     @Test
     fun `una zona inicialmente no tiene identificador`() {
         assertNull(zonaOk().id)
+    }
+
+    @Test
+    fun `el toString de la zona esta basado en la descripcion`() {
+        val zona = zonaOk()
+        Assertions.assertEquals(zona.descripcion, zona.toString())
     }
 }
 

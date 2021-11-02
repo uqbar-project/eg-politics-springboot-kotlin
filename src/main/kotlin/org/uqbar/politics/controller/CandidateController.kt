@@ -30,7 +30,7 @@ class CandidateController {
             .findById(id)
             .map { candidate ->
                 // solo modificamos lo que está disponible para cambiar en la aplicación
-                candidate.actualizarPromesas(candidateNuevo.promesas ?: emptyList())
+                candidate.actualizarPromesas(candidateNuevo.promesas)
                 if (candidateNuevo.votos > 0) {
                     candidate.votos = candidateNuevo.votos
                 }
