@@ -11,28 +11,27 @@ plugins {
 
 group = "org.uqbar"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_14
-java.targetCompatibility = JavaVersion.VERSION_14
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-hateoas")
-    implementation("org.springframework.boot:spring-boot-starter-web-services")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.5.6")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest:2.5.6")
+    implementation("org.springframework.boot:spring-boot-starter-hateoas:2.5.6")
+    implementation("org.springframework.boot:spring-boot-starter-web-services:2.5.6")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
-    implementation("org.springframework.boot:spring-boot-devtools")
+    implementation("org.springframework.boot:spring-boot-devtools:2.5.6")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")
 }
 
 tasks.withType<KotlinCompile> {
