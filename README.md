@@ -17,17 +17,9 @@ http://localhost:8080/swagger-ui/index.html#/
 
 Para conseguir el mismo efecto en tu proyecto solo tenés que agregar dos dependencias:
 
-```xml
-<dependency>
-  <groupId>io.springfox</groupId>
-  <artifactId>springfox-boot-starter</artifactId>
-  <version>3.0.0</version>
-</dependency>
-<dependency>
-  <groupId>io.springfox</groupId>
-  <artifactId>springfox-swagger-ui</artifactId>
-  <version>3.0.0</version>
-</dependency>
+```kts
+implementation("io.springfox:springfox-boot-starter:3.0.0")
+implementation("io.springfox:springfox-swagger-ui:3.0.0")
 ```
 
 Luego en los controllers la annotation `@ApiOperation` es la que permite agregar una descripción al endpoint
@@ -35,7 +27,7 @@ Luego en los controllers la annotation `@ApiOperation` es la que permite agregar
 ```xtend
 @GetMapping(value="/zonas/{id}")
 @ApiOperation("Permite traer la información de una zona, con las personas candidatas y las intenciones de voto incluidas.")
-def getZona(@PathVariable Long id) {
+fun getZona(@PathVariable id: Long): Zona = zonaService.getZona(id)
 ```
 
 que luego tomará Swagger para publicar en la página.
