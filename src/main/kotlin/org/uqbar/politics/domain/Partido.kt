@@ -39,15 +39,12 @@ abstract class Partido {
 
 @Entity
 class Peronista : Partido() {
-
     @Column
     var populista = false
-
 }
 
 @Entity
 class Preservativo : Partido() {
-
     @Column
     var fechaCreacion: LocalDate = LocalDate.now()
 

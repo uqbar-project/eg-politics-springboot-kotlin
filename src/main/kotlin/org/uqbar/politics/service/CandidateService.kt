@@ -24,7 +24,7 @@ class CandidateService {
         }
 
     @Transactional
-    fun actualizarCandidato(candidateNuevo: Candidate, id: Long): Candidate {
+    fun actualizarCandidate(candidateNuevo: Candidate, id: Long): Candidate {
         return candidateRepository
             .findById(id)
             .map { candidate ->

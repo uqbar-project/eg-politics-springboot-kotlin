@@ -18,7 +18,6 @@ class ZonaController {
     @GetMapping("/zonas")
     @ApiOperation("Devuelve todas las zonas de votación")
     @JsonView(View.Zona.Plana::class)
-
     fun getZonas(): Iterable<Zona> = zonaService.getZonas()
 
     @GetMapping("/zonas/{id}")

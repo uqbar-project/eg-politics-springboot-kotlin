@@ -1,12 +1,9 @@
 package org.uqbar.politics.domain
 
 import com.fasterxml.jackson.annotation.JsonView
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.serializers.View
-import org.uqbar.politics.serializers.ZonaParaGrillaSerializer
 import javax.persistence.*
-import kotlin.collections.*
 
 // Definir como default este serializador es una opción
 // Otra es utilizar la variante del mapper por cada método del endpoint
