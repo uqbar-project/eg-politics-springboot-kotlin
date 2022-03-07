@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class SwaggerConfig {
     @Bean
-    fun api() = GroupedOpenApi.builder()
-        .group("springshop-public")
-        .pathsToMatch("/public/**")
+    fun api(): GroupedOpenApi = GroupedOpenApi.builder()
+        .group("org.uqbar.politics")
+        .packagesToScan("org.uqbar.politics")
         .build()
 }
