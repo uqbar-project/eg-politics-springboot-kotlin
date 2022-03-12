@@ -19,7 +19,6 @@ repositories {
 val springVersion = "2.6.4"
 
 dependencies {
-
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springVersion")
     implementation("org.springframework.boot:spring-boot-starter-data-rest:$springVersion")
     implementation("org.springframework.boot:spring-boot-starter-hateoas:$springVersion")
