@@ -1,9 +1,14 @@
 package org.uqbar.politics.domain
 
 import com.fasterxml.jackson.annotation.JsonView
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.serializers.View
-import javax.persistence.*
 
 // Definir como default este serializador es una opción
 // Otra es utilizar la variante del mapper por cada método del endpoint
@@ -21,7 +26,7 @@ class Zona {
     @JsonView(View.Zona.Plana::class, View.Zona.Grilla::class)
     lateinit var descripcion: String
 
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch= FetchType.LAZY)
     @JsonView(View.Zona.Grilla::class)
     lateinit var candidates: MutableSet<Candidate>
 

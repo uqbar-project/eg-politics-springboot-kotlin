@@ -3,6 +3,29 @@
 
 [![build](https://github.com/uqbar-project/eg-politics-springboot-kotlin/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/uqbar-project/eg-politics-springboot/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/uqbar-project/eg-politics-springboot-kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/uqbar-project/eg-politics-springboot-kotlin)
 
+## Prerrequisitos
+
+Solo hace falta tener instalado [Docker](https://www.docker.com/). Una vez resuelto este paso abrí una consola de comandos y escribí
+
+```bash
+docker-compose up
+```
+
+Eso levanta tanto PostgreSQL como el cliente pgAdmin, como está explicado en [este ejemplo](https://github.com/uqbar-project/eg-manejo-proyectos-sql).
+
+La conexión a la base se configura en el archivo [`application.yml`](./src/main/resources/application.yml):
+
+```yml
+  datasource:
+    url: jdbc:postgresql://0.0.0.0:5432/politics
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+```
+
+- `0.0.0.0` apunta a nuestro contenedor de Docker
+- el usuario y contraseña está definido en el archivo `docker-compose.yml`
+
 ## Material relacionado
 
 - [Apunte con la explicación completa](https://docs.google.com/document/d/13vAmPKbWfWpRWze3AhLwnCHfWktfIIXnju3PD_tzyW4/edit)
@@ -18,16 +41,16 @@ http://localhost:8080/swagger-ui/index.html#/
 Para conseguir el mismo efecto en tu proyecto solo tenés que agregar dos dependencias:
 
 ```kts
-implementation("io.springfox:springfox-boot-starter:3.0.0")
-implementation("io.springfox:springfox-swagger-ui:3.0.0")
+implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
 ```
 
-Luego en los controllers la annotation `@ApiOperation` es la que permite agregar una descripción al endpoint
+Luego en los controllers la annotation `@Operation` es la que permite agregar una descripción al endpoint
 
-```xtend
-@GetMapping(value="/zonas/{id}")
-@ApiOperation("Permite traer la información de una zona, con las personas candidatas y las intenciones de voto incluidas.")
-fun getZona(@PathVariable id: Long): Zona = zonaService.getZona(id)
+```kt
+@GetMapping("/zonas")
+@Operation(summary = "Devuelve todas las zonas de votación")
+@JsonView(View.Zona.Plana::class)
+fun getZonas(): Iterable<Zona> = zonaService.getZonas()
 ```
 
 que luego tomará Swagger para publicar en la página.
