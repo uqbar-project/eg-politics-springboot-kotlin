@@ -1,9 +1,19 @@
 package org.uqbar.politics.domain
 
 import com.fasterxml.jackson.annotation.JsonView
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
+import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
+import jakarta.persistence.OrderColumn
 import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.serializers.View
-import javax.persistence.*
+
 
 @Entity
 class Candidate {

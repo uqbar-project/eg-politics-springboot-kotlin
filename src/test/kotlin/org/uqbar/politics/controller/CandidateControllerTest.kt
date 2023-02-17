@@ -2,7 +2,7 @@ package org.uqbar.politics.controller
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import org.junit.jupiter.api.Assertions
+import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.uqbar.politics.domain.Candidate
 import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.repository.CandidateRepository
-import javax.transaction.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
