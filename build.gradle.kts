@@ -34,7 +34,6 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
     implementation("org.springframework.boot:spring-boot-devtools")
-    implementation("org.springframework.boot:spring-boot-devtools")
 
     // conexión a la base de datos
     implementation("org.postgresql:postgresql:42.5.3")

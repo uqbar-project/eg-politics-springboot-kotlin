@@ -7,7 +7,7 @@ import org.uqbar.politics.domain.Candidate
 import org.uqbar.politics.service.CandidateService
 
 @RestController
-@CrossOrigin(origins = ["*"], methods = [RequestMethod.PUT, RequestMethod.GET])
+@CrossOrigin(origins = ["*"], allowedHeaders = ["*"], methods = [RequestMethod.PUT, RequestMethod.GET])
 class CandidateController {
 
     @Autowired

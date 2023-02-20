@@ -14,3 +14,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+# Para activar el Trace
+logging:
+  level:
+    root: INFO

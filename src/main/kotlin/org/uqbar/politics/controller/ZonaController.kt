@@ -9,18 +9,19 @@ import org.uqbar.politics.serializers.View
 import org.uqbar.politics.service.ZonaService
 
 @RestController
-@CrossOrigin(origins = ["*"], methods= [RequestMethod.GET])
+@CrossOrigin(origins = ["*"], methods= [RequestMethod.GET, RequestMethod.OPTIONS])
+@RequestMapping("/zonas")
 class ZonaController {
 
     @Autowired
     private lateinit var zonaService: ZonaService
 
-    @GetMapping("/zonas")
+    @GetMapping("")
     @Operation(summary = "Devuelve todas las zonas de votación")
     @JsonView(View.Zona.Plana::class)
     fun getZonas(): Iterable<Zona> = zonaService.getZonas()
 
-    @GetMapping("/zonas/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Muestra la información de una zona de votación con sus candidates")
     @JsonView(View.Zona.Grilla::class)
     fun getZona(@PathVariable id: Long): Zona = zonaService.getZona(id)
