@@ -19,15 +19,15 @@ class Zona {
 
     @Id
     @GeneratedValue
-    @JsonView(View.Zona.Plana::class, View.Zona.Grilla::class)
+    @JsonView(View.Zona.Plana::class, View.Zona.Detalle::class)
     var id: Long? = null
 
     @Column(length=150)
-    @JsonView(View.Zona.Plana::class, View.Zona.Grilla::class)
+    @JsonView(View.Zona.Plana::class, View.Zona.Detalle::class)
     lateinit var descripcion: String
 
     @OneToMany(fetch= FetchType.LAZY)
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     lateinit var candidates: MutableSet<Candidate>
 
     fun validar() {

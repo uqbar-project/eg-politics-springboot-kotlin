@@ -23,7 +23,16 @@ class ZonaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Muestra la información de una zona de votación con sus candidates")
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     fun getZona(@PathVariable id: Long): Zona = zonaService.getZona(id)
 
+    /*
+    Alternativa con serializadores
+
+    fun getZona(@PathVariable id: Long): Zona {
+       mapper.registerModule(
+           SimpleModule().addSerializer(ZonaParaGrillaSerializer())
+       )
+       return zonaService.getZona(id)
+    */
 }

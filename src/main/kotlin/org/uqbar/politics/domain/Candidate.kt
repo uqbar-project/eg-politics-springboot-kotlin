@@ -18,18 +18,18 @@ import org.uqbar.politics.serializers.View
 @Entity
 class Candidate {
     @Id @GeneratedValue
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     var id: Long? = null
 
     @Column(length=150)
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     var nombre = ""
 
     @ManyToOne
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     var partido: Partido? = null
 
-    @JsonView(View.Zona.Grilla::class)
+    @JsonView(View.Zona.Detalle::class)
     var votos = 0
 
     @OneToMany(fetch=FetchType.LAZY, cascade= [CascadeType.ALL])

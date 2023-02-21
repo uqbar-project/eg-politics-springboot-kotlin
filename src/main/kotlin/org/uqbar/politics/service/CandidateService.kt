@@ -30,7 +30,9 @@ class CandidateService {
                 if (candidateNuevo.votos > 0) {
                     candidate.votos = candidateNuevo.votos
                 }
+                // el save no es obligatorio si utilizamos las anotaciones transactional
                 candidateRepository.save(candidate)
+                //
                 candidate
             }
             .orElseThrow {
