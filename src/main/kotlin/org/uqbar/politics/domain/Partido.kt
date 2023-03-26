@@ -2,6 +2,7 @@ package org.uqbar.politics.domain
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.fasterxml.jackson.annotation.JsonView
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -9,6 +10,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
 import org.uqbar.politics.domain.exceptions.UserException
+import org.uqbar.politics.serializers.View
 import java.time.LocalDate
 
 @Entity
@@ -21,13 +23,15 @@ import java.time.LocalDate
 abstract class Partido {
 
     @Id @GeneratedValue
-    var id: Long? = null
+    @JsonView(View.Zona.Detalle::class)
+    open var id: Long? = null
 
     @Column(length=150)
-    lateinit var nombre: String
+    @JsonView(View.Zona.Detalle::class)
+    open lateinit var nombre: String
 
     @Column
-    var afiliados: Int = 0
+    open var afiliados: Int = 0
 
     open fun validar() {
         if (nombre.trim() == "") {
