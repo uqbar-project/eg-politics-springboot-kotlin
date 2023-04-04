@@ -69,9 +69,10 @@ class PoliticsBootstrap : InitializingBean {
         val partidoEnRepo = repoPartidos.findByNombre(partido.nombre)
         if (partidoEnRepo.isPresent()) {
             partido.id = partidoEnRepo.get().id
+        } else {
+            repoPartidos.save(partido)
+            println("Candidato ${partido.nombre} creado")
         }
-        repoPartidos.save(partido)
-        println("Candidato " + partido.nombre + " creado")
     }
 
     fun initCandidatos() {
@@ -132,9 +133,10 @@ class PoliticsBootstrap : InitializingBean {
         val candidateRepo = repoCandidates.findByNombre(candidate.nombre)
         if (candidateRepo.isPresent()) {
             candidate.id = candidateRepo.get().id
+        } else {
+            repoCandidates.save(candidate)
+            println("Candidate ${candidate.nombre} creade")
         }
-        repoCandidates.save(candidate)
-        println("Candidate " + candidate.nombre + if (candidateRepo.isPresent()) " creade" else " actualizade")
     }
 
     fun initZonas() {
@@ -154,11 +156,7 @@ class PoliticsBootstrap : InitializingBean {
         val listaZonas = repoZonas.findByDescripcion(zona.descripcion)
         if (listaZonas.isEmpty()) {
             repoZonas.save(zona)
-            println("Zona " + zona.descripcion + " creada")
-        } else {
-            val zonaBD = listaZonas.first()
-            zona.id = zonaBD.id
-            repoZonas.save(zona)
+            println("Zona ${zona.descripcion} creada")
         }
     }
 
@@ -169,6 +167,7 @@ class PoliticsBootstrap : InitializingBean {
         this.initPartidos()
         this.initCandidatos()
         this.initZonas()
+        println("------------------------------------------------------------------------")
     }
 
 }

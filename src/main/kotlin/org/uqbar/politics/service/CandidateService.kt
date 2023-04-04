@@ -30,8 +30,12 @@ class CandidateService {
                 if (candidateNuevo.votos > 0) {
                     candidate.votos = candidateNuevo.votos
                 }
-                // el save no es obligatorio si utilizamos las anotaciones transactional
+                // el save no es obligatorio si utilizamos la anotación
+                // @Transactional(Transactional.TxType.SUPPORTS)
                 candidateRepository.save(candidate)
+                // con REQUIRED nos aseguramos que una Runtime Exception
+                // rollbackea la actualización de la base
+                // if (true) throw RuntimeException("Kawabunga!")
                 //
                 candidate
             }
