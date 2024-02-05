@@ -31,33 +31,6 @@ La conexión a la base se configura en el archivo [`application.yml`](./src/main
 
 - [Apunte con la explicación completa](https://docs.google.com/document/d/13vAmPKbWfWpRWze3AhLwnCHfWktfIIXnju3PD_tzyW4/edit)
 
-## Swagger - Open API
-
-Un chiche interesante es que pueden explorar y testear con Swagger el presente ejemplo, levantando la aplicación y navegando en la siguiente URL:
-
-http://localhost:8080/swagger-ui/index.html#/
-
-[Swagger](https://swagger.io/) busca los controllers y arma un entorno web para probar los endpoints (puede resultar más cómodo que POSTMAN sobre todo para métodos POST o PUT).
-
-Para conseguir el mismo efecto en tu proyecto solo tenés que agregar dos dependencias:
-
-```kts
-implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
-```
-
-Luego en los controllers la annotation `@Operation` es la que permite agregar una descripción al endpoint
-
-```kt
-@GetMapping("/zonas")
-@Operation(summary = "Devuelve todas las zonas de votación")
-@JsonView(View.Zona.Plana::class)
-fun getZonas(): Iterable<Zona> = zonaService.getZonas()
-```
-
-que luego tomará Swagger para publicar en la página.
-
-![swagger](./images/swagger.png)
-
 ## Testeo de integración
 
 Podés ver la implementación de varios casos de prueba:
