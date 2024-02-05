@@ -9,7 +9,6 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.uqbar.politics.domain.Zona
@@ -17,7 +16,6 @@ import org.uqbar.politics.repository.ZonaRepository
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 @DisplayName("Dado un controller de zonas")
 class ZonaControllerTest {
     private val mapper = jacksonObjectMapper()
@@ -39,7 +37,7 @@ class ZonaControllerTest {
     }
 
     @Test
-    fun `al traer el dato de una zona trae las personas candidatas también`() {
+    fun `al traer el dato de una zona trae las personas candidatas tambien`() {
         val zonas = repoZonas.findAll().toList()
         assert(zonas.isNotEmpty(), { "No hay zonas cargadas en el sistema" })
         val ID_ZONA = zonas.first().id
