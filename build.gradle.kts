@@ -20,10 +20,6 @@ repositories {
     mavenCentral()
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -43,9 +39,6 @@ dependencies {
     testImplementation("com.h2database:h2:2.2.224")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
-//    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
 }
 
 tasks.withType<KotlinCompile> {
