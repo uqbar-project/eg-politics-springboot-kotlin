@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "Politics",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Politics",
+      "item": [
+        {
+          "name": "Candidates - Actualizar une",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "http://localhost:8080/candidates/7",
+              "protocol": "http",
+              "host": [
+                "localhost:8080"
+              ],
+              "path": [
+                "candidates",
+                "7"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 21,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Candidates - Ver datos de un candidate",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "http://localhost:8080/candidates/7",
+              "protocol": "http",
+              "host": [
+                "localhost:8080"
+              ],
+              "path": [
+                "candidates",
+                "7"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Zonas - Ver una zona con candidates",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "http://localhost:8080/zonas/1",
+              "protocol": "http",
+              "host": [
+                "localhost:8080"
+              ],
+              "path": [
+                "zonas",
+                "1"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Zonas - ver todas",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": null,
+            "description": "",
+            "url": {
+              "raw": "http://localhost:8080/zonas",
+              "protocol": "http",
+              "host": [
+                "localhost:8080"
+              ],
+              "path": [
+                "zonas"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bruno",
+      "event": []
+    }
+  ],
+  "variable": []
+}

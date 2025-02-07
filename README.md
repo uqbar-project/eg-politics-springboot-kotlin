@@ -44,4 +44,8 @@ Podés ver la implementación de varios casos de prueba:
   
 ## Cómo testear la app
 
-Podés descargarte [este archivo json](Insomnia_Politics.json) para importarlo en Insomnia.
+Podés descargarte la colección de endpoints en formato json para luego importarlo en alguno de estos clientes
+
+- [Bruno](Politics_Bruno.json)
+- [Insomnia](Politics_Insomnia.json)
+- [Postman](Politics_Postman.json)
