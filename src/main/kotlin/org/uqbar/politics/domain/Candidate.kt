@@ -1,27 +1,17 @@
 package org.uqbar.politics.domain
 
 import com.fasterxml.jackson.annotation.JsonView
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Column
-import jakarta.persistence.ElementCollection
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
-import jakarta.persistence.OrderColumn
+import jakarta.persistence.*
 import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.serializers.View
 
-
 @Entity
 class Candidate {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @JsonView(View.Zona.Detalle::class)
     var id: Long? = null
 
-    @Column(length=150)
     @JsonView(View.Zona.Detalle::class)
     var nombre = ""
 
@@ -32,7 +22,7 @@ class Candidate {
     @JsonView(View.Zona.Detalle::class)
     var votos = 0
 
-    @OneToMany(fetch=FetchType.LAZY, cascade= [CascadeType.ALL])
+    @OneToMany(cascade = [CascadeType.ALL])
     @OrderColumn
     var promesas = mutableListOf<Promesa>()
 

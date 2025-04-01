@@ -1,9 +1,6 @@
 package org.uqbar.politics.domain
 
-import com.fasterxml.jackson.annotation.JsonSubTypes
-import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonView
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
@@ -14,23 +11,18 @@ import org.uqbar.politics.serializers.View
 import java.time.LocalDate
 
 @Entity
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes(
-    JsonSubTypes.Type(value = Peronista::class, name = "PJ"),
-    JsonSubTypes.Type(value = Preservativo::class, name = "PRE")
-)
-@Inheritance(strategy= InheritanceType.JOINED)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@Inheritance(strategy=InheritanceType.JOINED)
 abstract class Partido {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @JsonView(View.Zona.Detalle::class)
     open var id: Long? = null
 
-    @Column(length=150)
     @JsonView(View.Zona.Detalle::class)
     open lateinit var nombre: String
 
-    @Column
     open var afiliados: Int = 0
 
     open fun validar() {
@@ -48,13 +40,11 @@ abstract class Partido {
 
 @Entity
 class Peronista : Partido() {
-    @Column
     var populista = false
 }
 
 @Entity
 class Preservativo : Partido() {
-    @Column
     var fechaCreacion: LocalDate = LocalDate.now()
 
     override fun validar() {

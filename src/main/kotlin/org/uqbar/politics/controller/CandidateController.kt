@@ -16,7 +16,7 @@ class CandidateController {
     fun getCandidate(@PathVariable id: Long) =
         candidateService.getCandidate(id)
 
-    @PutMapping("/candidates/{id}")
+    @PatchMapping("/candidates/{id}")
     fun actualizarCandidate(@RequestBody candidateNuevo: Candidate, @PathVariable id: Long): Candidate =
         candidateService.actualizarCandidate(candidateNuevo, id)
 

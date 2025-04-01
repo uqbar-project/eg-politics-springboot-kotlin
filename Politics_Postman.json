@@ -6,14 +6,10 @@
   },
   "item": [
     {
-      "name": "bruno",
-      "event": []
-    },
-    {
       "name": "Candidates - Actualizar une",
       "event": [],
       "request": {
-        "method": "PUT",
+        "method": "PATCH",
         "header": [
           {
             "key": "Content-Type",
@@ -22,7 +18,9 @@
             "type": "default"
           }
         ],
-        "auth": null,
+        "auth": {
+          "type": "noauth"
+        },
         "description": "",
         "url": {
           "raw": "{{baseUrl}}/candidates/7",
@@ -39,7 +37,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 21,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
+          "raw": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 28,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -54,7 +52,9 @@
       "request": {
         "method": "GET",
         "header": [],
-        "auth": null,
+        "auth": {
+          "type": "noauth"
+        },
         "description": "",
         "url": {
           "raw": "{{baseUrl}}/candidates/7",
@@ -77,7 +77,9 @@
       "request": {
         "method": "GET",
         "header": [],
-        "auth": null,
+        "auth": {
+          "type": "noauth"
+        },
         "description": "",
         "url": {
           "raw": "{{baseUrl}}/zonas/1",
@@ -100,7 +102,9 @@
       "request": {
         "method": "GET",
         "header": [],
-        "auth": null,
+        "auth": {
+          "type": "noauth"
+        },
         "description": "",
         "url": {
           "raw": "{{baseUrl}}/zonas",
@@ -115,16 +119,15 @@
           "variable": []
         }
       }
+    },
+    {
+      "name": "bruno",
+      "event": []
     }
   ],
   "variable": [
     {
       "key": "baseUrl",
-      "value": "",
-      "type": "default"
-    },
-    {
-      "key": "baseurl",
       "value": "",
       "type": "default"
     }

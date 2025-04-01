@@ -8,7 +8,7 @@
       "seq": 1,
       "request": {
         "url": "{{baseUrl}}/candidates/7",
-        "method": "PUT",
+        "method": "PATCH",
         "headers": [
           {
             "name": "Content-Type",
@@ -19,9 +19,10 @@
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 21,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
+          "json": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 28,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
           "formUrlEncoded": [],
-          "multipartForm": []
+          "multipartForm": [],
+          "file": []
         },
         "script": {},
         "vars": {},
@@ -45,7 +46,8 @@
         "body": {
           "mode": "none",
           "formUrlEncoded": [],
-          "multipartForm": []
+          "multipartForm": [],
+          "file": []
         },
         "script": {},
         "vars": {},
@@ -69,7 +71,8 @@
         "body": {
           "mode": "none",
           "formUrlEncoded": [],
-          "multipartForm": []
+          "multipartForm": [],
+          "file": []
         },
         "script": {},
         "vars": {},
@@ -93,7 +96,8 @@
         "body": {
           "mode": "none",
           "formUrlEncoded": [],
-          "multipartForm": []
+          "multipartForm": [],
+          "file": []
         },
         "script": {},
         "vars": {},
@@ -116,7 +120,7 @@
             "value": "http://localhost:8080",
             "enabled": true,
             "local": false,
-            "uid": "9T78uvOgvcr7qsHNvbwbv"
+            "uid": "oZUTK3bvWg40PbbLzZo2K"
           }
         ]
       }
@@ -129,6 +133,8 @@
     "ignore": [
       "node_modules",
       ".git"
-    ]
+    ],
+    "size": 0.0009288787841796875,
+    "filesCount": 5
   }
 }

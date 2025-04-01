@@ -10,10 +10,10 @@ import java.time.LocalDate
 @Entity
 class Promesa(@Column(length = 255) var accionPrometida: String = "") {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     var id: Long? = null
 
-    @Column
     var fecha: LocalDate = LocalDate.now()
 
     fun validar() {

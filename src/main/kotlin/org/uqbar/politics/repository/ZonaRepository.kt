@@ -8,7 +8,7 @@ import java.util.*
 interface ZonaRepository : CrudRepository<Zona, Long> {
     fun findByDescripcion(descripcion: String): List<Zona>
 
-    @EntityGraph(attributePaths=["candidates.promesas", "candidates.partido", "candidates.opiniones"])
+    @EntityGraph(attributePaths = ["candidates.partido"])
     override fun findById(id: Long): Optional<Zona>
 
 }
