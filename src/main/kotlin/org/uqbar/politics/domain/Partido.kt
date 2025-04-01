@@ -1,5 +1,7 @@
 package org.uqbar.politics.domain
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonView
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -11,7 +13,11 @@ import org.uqbar.politics.serializers.View
 import java.time.LocalDate
 
 @Entity
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes(
+    JsonSubTypes.Type(value = Peronista::class, name = "PJ"),
+    JsonSubTypes.Type(value = Preservativo::class, name = "PRE")
+)
 @Inheritance(strategy=InheritanceType.JOINED)
 abstract class Partido {
 
