@@ -47,5 +47,4 @@ Podés ver la implementación de varios casos de prueba:
 Podés descargarte la colección de endpoints en formato json para luego importarlo en alguno de estos clientes
 
 - [Bruno](Politics_Bruno.json)
-- [Insomnia](Politics_Insomnia.json)
 - [Postman](Politics_Postman.json)
