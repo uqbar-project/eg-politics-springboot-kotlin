@@ -16,6 +16,9 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '21'
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
       - name: Run tests with coverage
         run: ./gradlew test
 
