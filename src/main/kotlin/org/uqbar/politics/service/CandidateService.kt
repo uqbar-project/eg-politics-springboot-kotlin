@@ -27,7 +27,6 @@ class CandidateService {
             .map { candidate ->
                 // solo modificamos lo que está disponible para cambiar en la aplicación
                 candidate.actualizarPromesas(candidateNuevo.promesas)
-                candidate.agregarPromesa("falopa para todos")
                 if (candidateNuevo.votos > 0) {
                     candidate.votos = candidateNuevo.votos
                 }

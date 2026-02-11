@@ -8,7 +8,6 @@ import org.uqbar.politics.serializers.View
 import org.uqbar.politics.service.ZonaService
 
 @RestController
-@CrossOrigin(origins = ["*"], methods= [RequestMethod.GET, RequestMethod.OPTIONS])
 @RequestMapping("/zonas")
 class ZonaController {
 
