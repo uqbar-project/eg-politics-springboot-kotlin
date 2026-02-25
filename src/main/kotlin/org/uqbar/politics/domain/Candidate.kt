@@ -48,7 +48,7 @@ class Candidate {
     fun actualizarPromesas(nuevasPromesas: List<Promesa>) {
         if (nuevasPromesas.isNotEmpty()) {
             promesas.clear()
-            promesas.addAll(nuevasPromesas)
+            promesas.addAll(nuevasPromesas.map {promesa -> Promesa(promesa.accionPrometida) })
         }
     }
 
