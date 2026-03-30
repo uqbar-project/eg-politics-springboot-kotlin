@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
@@ -18,6 +19,7 @@ import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.repository.CandidateRepository
 
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 @DisplayName("Dado un controller de zonas")
 class CandidateControllerTest {
@@ -119,5 +121,9 @@ class CandidateControllerTest {
         .andExpect(jsonPath("$.nombre").value(CANDIDATE_NOMBRE))
     }
 
-    fun getCandidateDePrueba() = repoCandidates.findByNombre(CANDIDATE_NOMBRE).get()
+    fun getCandidateDePrueba() = repoCandidates.save(
+        Candidate().apply {
+            nombre = CANDIDATE_NOMBRE
+        }
+    )
 }

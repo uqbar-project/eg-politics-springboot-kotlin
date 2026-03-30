@@ -3,6 +3,7 @@ package org.uqbar.politics
 import java.time.LocalDate
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import org.uqbar.politics.domain.*
 import org.uqbar.politics.repository.CandidateRepository
@@ -14,6 +15,7 @@ import org.uqbar.politics.repository.ZonaRepository
  * Para explorar otras opciones
  * https://stackoverflow.com/questions/38040572/spring-boot-loading-initial-data
  */
+@Profile("!test")
 @Service
 class PoliticsBootstrap : InitializingBean {
 
