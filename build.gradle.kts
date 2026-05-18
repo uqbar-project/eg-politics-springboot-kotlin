@@ -25,11 +25,7 @@ dependencies {
 
     // básicos de cualquier proyecto Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-hateoas")
-    implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // conexión a la base de datos
     runtimeOnly("org.postgresql:postgresql")
