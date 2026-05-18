@@ -27,6 +27,22 @@ La conexión a la base se configura en el archivo [`application.yml`](./src/main
 - `0.0.0.0` apunta a nuestro contenedor de Docker
 - el usuario y contraseña está definido en el archivo `docker-compose.yml`
 
+Otra variante es tener variables de entorno:
+
+```yml
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+```
+
+y le pasamos en `Edit Configuration` la lista de valores. Primero `Modify options` > `Environment variables` y le pasamos la información de Render:
+
+![Environment Variables](./images/environment_variables.png)
+
+
+
 ## Material relacionado
 
 - [Apunte con la explicación completa](https://docs.google.com/document/d/13vAmPKbWfWpRWze3AhLwnCHfWktfIIXnju3PD_tzyW4/edit)
