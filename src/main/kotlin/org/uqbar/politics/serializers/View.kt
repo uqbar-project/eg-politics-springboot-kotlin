@@ -1,8 +1,8 @@
 package org.uqbar.politics.serializers
 
 internal class View {
-    internal interface Zona {
-        interface Detalle
-        interface Plana
+    internal interface Zone {
+        interface Detail
+        interface Plain
     }
 }

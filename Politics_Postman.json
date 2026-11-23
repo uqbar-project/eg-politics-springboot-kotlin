@@ -37,7 +37,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 28,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
+          "raw": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votes\": 28,\n  \"promises\": [\n    {\n      \"action\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"action\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opinions\": []\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -72,7 +72,7 @@
       }
     },
     {
-      "name": "Zonas - Ver una zona con candidates",
+      "name": "Zones - Ver una zone con candidates",
       "event": [],
       "request": {
         "method": "GET",
@@ -82,13 +82,13 @@
         },
         "description": "",
         "url": {
-          "raw": "{{baseUrl}}/zonas/1",
+          "raw": "{{baseUrl}}/zones/1",
           "protocol": "",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
-            "zonas",
+            "zones",
             "1"
           ],
           "query": [],
@@ -97,7 +97,7 @@
       }
     },
     {
-      "name": "Zonas - ver todas",
+      "name": "Zones - ver todas",
       "event": [],
       "request": {
         "method": "GET",
@@ -107,13 +107,13 @@
         },
         "description": "",
         "url": {
-          "raw": "{{baseUrl}}/zonas",
+          "raw": "{{baseUrl}}/zones",
           "protocol": "",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
-            "zonas"
+            "zones"
           ],
           "query": [],
           "variable": []

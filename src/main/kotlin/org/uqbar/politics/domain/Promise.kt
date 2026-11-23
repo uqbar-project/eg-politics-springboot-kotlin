@@ -8,17 +8,17 @@ import org.uqbar.politics.domain.exceptions.UserException
 import java.time.LocalDate
 
 @Entity
-class Promesa(@Column(length = 255) var accionPrometida: String = "") {
+class Promise(@Column(length = 255) var action: String = "") {
 
     @Id
     @GeneratedValue
     var id: Long? = null
 
-    var fecha: LocalDate = LocalDate.now()
+    var date: LocalDate = LocalDate.now()
 
-    fun validar() {
-        if (accionPrometida.trim() == "") {
-            throw UserException("Debe ingresar una acción en la promesa")
+    fun validate() {
+        if (action.trim() == "") {
+            throw UserException("Promise action is required")
         }
     }
 

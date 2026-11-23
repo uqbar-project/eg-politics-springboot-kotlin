@@ -19,7 +19,7 @@
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votos\": 28,\n  \"promesas\": [\n    {\n      \"accionPrometida\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"accionPrometida\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opiniones\": []\n}",
+          "json": "{\n  \"id\": 7,\n  \"nombre\": \"Myriam Benitez\",\n  \"votes\": 28,\n  \"promises\": [\n    {\n      \"action\": \"Girar y girar hacia la libertad\",\n      \"fecha\": \"2021-11-02\"\n    },\n    {\n      \"action\": \"Subir las notas de Algo 3\",\n      \"fecha\": \"2021-11-02\"\n    }\n  ],\n  \"opinions\": []\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -61,10 +61,10 @@
     },
     {
       "type": "http",
-      "name": "Zonas - Ver una zona con candidates",
+      "name": "Zones - Ver una zone con candidates",
       "seq": 3,
       "request": {
-        "url": "{{baseUrl}}/zonas/1",
+        "url": "{{baseUrl}}/zones/1",
         "method": "GET",
         "headers": [],
         "params": [],
@@ -86,10 +86,10 @@
     },
     {
       "type": "http",
-      "name": "Zonas - ver todas",
+      "name": "Zones - ver todas",
       "seq": 4,
       "request": {
-        "url": "{{baseUrl}}/zonas",
+        "url": "{{baseUrl}}/zones",
         "method": "GET",
         "headers": [],
         "params": [],

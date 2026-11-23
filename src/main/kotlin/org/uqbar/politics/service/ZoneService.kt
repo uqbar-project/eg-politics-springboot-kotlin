@@ -5,28 +5,28 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.server.ResponseStatusException
-import org.uqbar.politics.domain.Zona
-import org.uqbar.politics.repository.ZonaRepository
+import org.uqbar.politics.domain.Zone
+import org.uqbar.politics.repository.ZoneRepository
 
 @Service
-class ZonaService {
+class ZoneService {
 
     @Autowired
-    lateinit var zonaRepository: ZonaRepository
+    lateinit var zoneRepository: ZoneRepository
 
     /*
  Alternativa con DTO
 
- fun getZonas(): List<ZonaPlanaDTO> = zonaRepository.findAll().map { zona -> ZonaPlanaDTO(zona.id!!, zona.descripcion) }
+ fun getZones(): List<ZoneSummaryDTO> = zoneRepository.findAll().map { zone -> ZoneSummaryDTO(zone.id!!, zone.name) }
 * */
     @Transactional(readOnly = true)
-    fun getZonas(): Iterable<Zona> = zonaRepository.findAll()
+    fun getZones(): Iterable<Zone> = zoneRepository.findAll()
 
     @Transactional(readOnly = true)
-    fun getZona(id: Long): Zona = zonaRepository
+    fun getZone(id: Long): Zone = zoneRepository
         .findById(id)
         .orElseThrow {
-            ResponseStatusException(HttpStatus.NOT_FOUND, "La zona con identificador $id no existe")
+            ResponseStatusException(HttpStatus.NOT_FOUND, "Zone with id $id not found")
         }
 
 }

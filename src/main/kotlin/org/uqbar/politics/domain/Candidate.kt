@@ -9,59 +9,59 @@ import org.uqbar.politics.serializers.View
 class Candidate {
     @Id
     @GeneratedValue
-    @JsonView(View.Zona.Detalle::class)
+    @JsonView(View.Zone.Detail::class)
     var id: Long? = null
 
-    @JsonView(View.Zona.Detalle::class)
-    var nombre = ""
+    @JsonView(View.Zone.Detail::class)
+    var name = ""
 
     @ManyToOne
-    @JsonView(View.Zona.Detalle::class)
-    var partido: Partido? = null
+    @JsonView(View.Zone.Detail::class)
+    var party: Party? = null
 
-    @JsonView(View.Zona.Detalle::class)
-    var votos = 0
+    @JsonView(View.Zone.Detail::class)
+    var votes = 0
 
     @OneToMany(cascade = [CascadeType.ALL])
     @OrderColumn
-    var promesas = mutableListOf<Promesa>()
+    var promises = mutableListOf<Promise>()
 
     @ElementCollection
     @OrderColumn
-    var opiniones = mutableListOf<String>()
+    var opinions = mutableListOf<String>()
 
-    fun validar() {
-        if (nombre.trim() == "") {
-            throw UserException("Debe ingresar descripcion")
+    fun validate() {
+        if (name.trim() == "") {
+            throw UserException("Name is required")
         }
-        if (partido === null) {
-            throw UserException("El candidato debe estar participando en un partido político")
-        }
-    }
-
-    override fun toString(): String = nombre
-
-    fun agregarPromesa(nuevaPromesa: String) {
-        promesas.add(Promesa(nuevaPromesa))
-    }
-
-    fun actualizarPromesas(nuevasPromesas: List<Promesa>) {
-        if (nuevasPromesas.isNotEmpty()) {
-            promesas.clear()
-            promesas.addAll(nuevasPromesas.map {promesa -> Promesa(promesa.accionPrometida) })
+        if (party === null) {
+            throw UserException("Candidate must belong to a political party")
         }
     }
 
-    fun agregarOpinion(opinion: String) {
-        opiniones.add(opinion)
+    override fun toString(): String = name
+
+    fun addPromise(newPromise: String) {
+        promises.add(Promise(newPromise))
     }
 
-    fun votar() {
-        votos++
+    fun updatePromises(newPromises: List<Promise>) {
+        if (newPromises.isNotEmpty()) {
+            promises.clear()
+            promises.addAll(newPromises.map {promise -> Promise(promise.action) })
+        }
+    }
+
+    fun addOpinion(opinion: String) {
+        opinions.add(opinion)
+    }
+
+    fun vote() {
+        votes++
     }
 
     fun reset() {
-        promesas = mutableListOf()
-        opiniones = mutableListOf()
+        promises = mutableListOf()
+        opinions = mutableListOf()
     }
 }

@@ -19,7 +19,7 @@ import org.uqbar.politics.repository.CandidateRepository
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("Dado un controller de zonas")
+@DisplayName("Zone controller")
 class CandidateControllerTest {
 
     private val mapper = jacksonObjectMapper().apply {
@@ -30,17 +30,17 @@ class CandidateControllerTest {
     lateinit var mockMvc: MockMvc
 
     @Autowired
-    lateinit var repoCandidates: CandidateRepository
+    lateinit var candidateRepository: CandidateRepository
 
-    private val CANDIDATE_NOMBRE = "Julio Sosa"
+    private val CANDIDATE_NAME = "Julio Sosa"
 
     @Test
     @Transactional
-    fun `podemos actualizar la informacion de una persona candidata`() {
-        val candidate = getCandidateDePrueba()
-        assertEquals(0, candidate.votos)
+    fun `can update candidate information`() {
+        val candidate = getTestCandidate()
+        assertEquals(0, candidate.votes)
         candidate.reset()
-        candidate.votar()
+        candidate.vote()
         val responseEntity = mockMvc.perform(
             MockMvcRequestBuilders.patch("/candidates/" + candidate.id)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -49,58 +49,58 @@ class CandidateControllerTest {
 
         assertEquals(200, responseEntity.status)
 
-        val candidateActualizado = repoCandidates.findByNombre(CANDIDATE_NOMBRE).get()
-        assertEquals(1, candidateActualizado.votos)
+        val updatedCandidateResult = candidateRepository.findByName(CANDIDATE_NAME).get()
+        assertEquals(1, updatedCandidateResult.votes)
     }
 
     @Test
     @Transactional
-    fun `actualizar solo promesas para un candidato pisa las promesas anteriores y deja los votos como estaban`() {
+    fun `updating only promises replaces promises and keeps votes`() {
         // ARRANGE
-        // Creamos un candidato con 3 votos y 1 promesa
-        val candidate = getCandidateDePrueba()
-        repoCandidates.save(candidate.apply {
-            votar()
-            votar()
-            votar()
-            agregarPromesa("Terminar con la inseguridad")
+        // Creamos un candidate con 3 votes y 1 promise
+        val candidate = getTestCandidate()
+        candidateRepository.save(candidate.apply {
+            vote()
+            vote()
+            vote()
+            addPromise("Terminar con la inseguridad")
         })
 
         // ACT
-        // Actualizamos al candidato
-        // - no pasamos votos
-        // - pasamos una nueva lista de promesas
+        // Actualizamos al candidate
+        // - no pasamos votes
+        // - pasamos una nueva lista de promises
         mockMvc.perform(
             MockMvcRequestBuilders.patch("/candidates/" + candidate.id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(Candidate().apply {
-                    agregarPromesa("Promocionar a todes les alumnes")
+                    addPromise("Promocionar a todes les alumnes")
                 }))
         )
         .andExpect(status().isOk)
 
         // ASSERT
-        // - los votos siguen igual
-        // - la lista de promesas se sobreescribió
-        val candidateModificado = repoCandidates.findById(candidate.id!!).orElseThrow { UserException("Candidate " + candidate.id + " no encontrado")}
-        assertEquals("Promocionar a todes les alumnes", candidateModificado.promesas.first().accionPrometida)
-        assertEquals(3, candidateModificado.votos)
+        // - los votes siguen igual
+        // - la lista de promises se sobreescribió
+        val modifiedCandidate = candidateRepository.findById(candidate.id!!).orElseThrow { UserException("Candidate " + candidate.id + " no encontrado")}
+        assertEquals("Promocionar a todes les alumnes", modifiedCandidate.promises.first().action)
+        assertEquals(3, modifiedCandidate.votes)
     }
 
     @Test
     @Transactional
-    fun `actualizar un candidate inexistente devuelve un codigo de http 404`() {
+    fun `updating a nonexistent candidate returns 404`() {
         mockMvc.perform(
             MockMvcRequestBuilders.patch("/candidates/3253532")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(Candidate().apply {
-                    agregarPromesa("Promocionar a todes les alumnes")
+                    addPromise("Promocionar a todes les alumnes")
                 }))
         ).andExpect(status().isNotFound)
     }
 
     @Test
-    fun `si buscamos un candidate inexistente, recibimos un error 404 de http`() {
+    fun `getting a nonexistent candidate returns 404`() {
         mockMvc.perform(
             MockMvcRequestBuilders.get("/candidates/22141")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -108,16 +108,16 @@ class CandidateControllerTest {
     }
 
     @Test
-    fun `si buscamos un candidate existente, recibimos el candidate`() {
-        val candidate = getCandidateDePrueba()
+    fun `getting an existing candidate returns the candidate`() {
+        val candidate = getTestCandidate()
         mockMvc.perform(
             MockMvcRequestBuilders.get("/candidates/" + candidate.id)
                 .contentType(MediaType.APPLICATION_JSON)
         )
         .andExpect(status().isOk)
         .andExpect(content().contentType("application/json"))
-        .andExpect(jsonPath("$.nombre").value(CANDIDATE_NOMBRE))
+        .andExpect(jsonPath("$.name").value(CANDIDATE_NAME))
     }
 
-    fun getCandidateDePrueba() = repoCandidates.findByNombre(CANDIDATE_NOMBRE).get()
+    fun getTestCandidate() = candidateRepository.findByName(CANDIDATE_NAME).get()
 }

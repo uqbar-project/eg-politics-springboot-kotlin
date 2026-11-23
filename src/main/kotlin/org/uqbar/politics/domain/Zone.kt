@@ -6,29 +6,29 @@ import org.uqbar.politics.domain.exceptions.UserException
 import org.uqbar.politics.serializers.View
 
 @Entity
-class Zona {
+class Zone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(View.Zona.Plana::class, View.Zona.Detalle::class)
+    @JsonView(View.Zone.Plain::class, View.Zone.Detail::class)
     var id: Long? = null
 
     @Column(length = 50)
-    @JsonView(View.Zona.Plana::class, View.Zona.Detalle::class)
-    lateinit var descripcion: String
+    @JsonView(View.Zone.Plain::class, View.Zone.Detail::class)
+    lateinit var name: String
 
     @OneToMany
-    @JsonView(View.Zona.Detalle::class)
+    @JsonView(View.Zone.Detail::class)
     lateinit var candidates: MutableSet<Candidate>
 
-    fun validar() {
-        if (descripcion.trim() == "") {
-            throw UserException("Debe ingresar descripcion")
+    fun validate() {
+        if (name.trim() == "") {
+            throw UserException("Name is required")
         }
         if (candidates.isEmpty()) {
-            throw UserException("Debe haber al menos un candidato en la zona")
+            throw UserException("Zone must have at least one candidate")
         }
     }
 
-    override fun toString(): String = descripcion
+    override fun toString(): String = name
 }
