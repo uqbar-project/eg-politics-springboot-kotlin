@@ -3,32 +3,32 @@ package org.uqbar.politics.controller
 import com.fasterxml.jackson.annotation.JsonView
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import org.uqbar.politics.domain.Zone
+import org.uqbar.politics.domain.Zona
 import org.uqbar.politics.serializers.View
-import org.uqbar.politics.service.ZoneService
+import org.uqbar.politics.service.ZonaService
 
 @RestController
-@RequestMapping("/zones")
-class ZoneController {
+@RequestMapping("/zonas")
+class ZonaController {
 
     @Autowired
-    private lateinit var zoneService: ZoneService
+    private lateinit var zonaService: ZonaService
 
     @GetMapping("")
-    @JsonView(View.Zone.Plain::class)
-    fun getZones(): Iterable<Zone> = zoneService.getZones()
+    @JsonView(View.Zona.Plana::class)
+    fun getZonas(): Iterable<Zona> = zonaService.getZonas()
 
     @GetMapping("/{id}")
-    @JsonView(View.Zone.Detail::class)
-    fun getZone(@PathVariable id: Long): Zone = zoneService.getZone(id)
+    @JsonView(View.Zona.Detalle::class)
+    fun getZona(@PathVariable id: Long): Zona = zonaService.getZona(id)
 
     /*
     Alternativa con serializadores
 
-    fun getZone(@PathVariable id: Long): Zone {
+    fun getZona(@PathVariable id: Long): Zona {
        mapper.registerModule(
            SimpleModule().addSerializer(ZonaParaGrillaSerializer())
        )
-       return zoneService.getZone(id)
+       return zonaService.getZona(id)
     */
 }

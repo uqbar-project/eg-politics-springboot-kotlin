@@ -7,8 +7,8 @@ import java.util.*
 
 interface CandidateRepository : CrudRepository<Candidate, Long> {
 
-    fun findByName(name: String): Optional<Candidate>
+    fun findByNombre(nombre: String): Optional<Candidate>
 
-    @EntityGraph(attributePaths = ["party", "promises", "opinions"])
+    @EntityGraph(attributePaths = ["partido", "promesas", "opiniones"])
     override fun findById(id: Long): Optional<Candidate>
 }

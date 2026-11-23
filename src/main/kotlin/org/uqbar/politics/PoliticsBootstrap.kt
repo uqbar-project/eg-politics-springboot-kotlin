@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.uqbar.politics.domain.*
 import org.uqbar.politics.repository.CandidateRepository
-import org.uqbar.politics.repository.PartyRepository
-import org.uqbar.politics.repository.ZoneRepository
+import org.uqbar.politics.repository.PartidoRepository
+import org.uqbar.politics.repository.ZonaRepository
 
 /**
  *
@@ -18,17 +18,17 @@ import org.uqbar.politics.repository.ZoneRepository
 class PoliticsBootstrap : InitializingBean {
 
     @Autowired
-    private lateinit var zoneRepository: ZoneRepository
+    private lateinit var repoZonas: ZonaRepository
 
     @Autowired
-    private lateinit var partyRepository: PartyRepository
+    private lateinit var repoPartidos: PartidoRepository
 
     @Autowired
-    private lateinit var candidateRepository: CandidateRepository
+    private lateinit var repoCandidates: CandidateRepository
 
-    private lateinit var frejuli: PeronistParty
-    private lateinit var perone: PeronistParty
-    private lateinit var prime: PreservativeParty
+    private lateinit var frejuli: Peronista
+    private lateinit var perone: Peronista
+    private lateinit var prime: Preservativo
 
     private lateinit var sosa: Candidate
     private lateinit var benitez: Candidate
@@ -38,125 +38,125 @@ class PoliticsBootstrap : InitializingBean {
     private lateinit var rota: Candidate
     private lateinit var cafrune: Candidate
 
-    private lateinit var nacional: Zone
-    private lateinit var springfield: Zone
+    private lateinit var nacional: Zona
+    private lateinit var springfield: Zona
 
-    fun initParties() {
-        frejuli = PeronistParty().apply {
-            members = 60000
-            name = "FREJULI"
-            populist = true
+    fun initPartidos() {
+        frejuli = Peronista().apply {
+            afiliados = 60000
+            nombre = "FREJULI"
+            populista = true
         }
 
-        perone = PeronistParty().apply {
-            members = 5000
-            name = "Perone"
-            populist = false
+        perone = Peronista().apply {
+            afiliados = 5000
+            nombre = "Perone"
+            populista = false
         }
 
-        prime = PreservativeParty().apply {
-            members = 1200
-            name = "PRIME"
-            foundationDate = LocalDate.parse("2009-06-16")
+        prime = Preservativo().apply {
+            afiliados = 1200
+            nombre = "PRIME"
+            fechaCreacion = LocalDate.parse("2009-06-16")
         }
 
-        this.createParty(frejuli)
-        this.createParty(perone)
-        this.createParty(prime)
+        this.crearPartidos(frejuli)
+        this.crearPartidos(perone)
+        this.crearPartidos(prime)
     }
 
-    fun createParty(party: Party) {
-        val existingParty = partyRepository.findByName(party.name)
-        if (existingParty.isPresent()) {
-            party.id = existingParty.get().id
+    fun crearPartidos(partido: Partido) {
+        val partidoEnRepo = repoPartidos.findByNombre(partido.nombre)
+        if (partidoEnRepo.isPresent()) {
+            partido.id = partidoEnRepo.get().id
         } else {
-            partyRepository.save(party)
-            println("Party ${party.name} created")
+            repoPartidos.save(partido)
+            println("Candidato ${partido.nombre} creado")
         }
     }
 
-    fun initCandidates() {
+    fun initCandidatos() {
         sosa = Candidate().apply {
-            name = "Julio Sosa"
-            party = frejuli
-            addPromise("Terminar con la inseguridad")
-            addPromise("Aborto para unos, banderitas para otros")
+            nombre = "Julio Sosa"
+            partido = frejuli
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Aborto para unos, banderitas para otros")
         }
         benitez = Candidate().apply {
-            name = "Myriam Benitez"
-            party = frejuli
-            addPromise("Girar y girar hacia la libertad")
+            nombre = "Myriam Benitez"
+            partido = frejuli
+            agregarPromesa("Girar y girar hacia la libertad")
         }
         yapura = Candidate().apply {
-            name = "Marcelo Yapura"
-            party = frejuli
-            addPromise("Terminar con la pobreza")
-            addPromise("Que todos los docentes de la UTN cobren en euros")
+            nombre = "Marcelo Yapura"
+            partido = frejuli
+            agregarPromesa("Terminar con la pobreza")
+            agregarPromesa("Que todos los docentes de la UTN cobren en euros")
         }
         ramos = Candidate().apply {
-            name = "Manuel Ramos"
-            party = perone
-            addPromise("Terminar con la inseguridad")
-            addPromise("Recuperar la confianza de los argentinos")
+            nombre = "Manuel Ramos"
+            partido = perone
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Recuperar la confianza de los argentinos")
         }
         monti = Candidate().apply {
-            name = "Yaco Monti"
-            party = perone
-            addPromise("Terminar con la inseguridad")
-            addPromise("Recuperar la dignidad")
+            nombre = "Yaco Monti"
+            partido = perone
+            agregarPromesa("Terminar con la inseguridad")
+            agregarPromesa("Recuperar la dignidad")
         }
         rota = Candidate().apply {
-            name = "Nino Rota"
-            party = prime
-            addPromise("Ganarle a la pobreza")
-            addPromise("Sacar el cepo a la moneda extranjera")
-            addPromise("Eliminar el impuesto a las ganancias")
+            nombre = "Nino Rota"
+            partido = prime
+            agregarPromesa("Ganarle a la pobreza")
+            agregarPromesa("Sacar el cepo a la moneda extranjera")
+            agregarPromesa("Eliminar el impuesto a las ganancias")
         }
         cafrune = Candidate().apply {
-            name = "Yamila Cafrune"
-            party = prime
-            addPromise("Que vuelva Futbol para Todos")
-            addPromise("Estatizar las empresas privadas")
-            addPromise("Pesificar la economia")
+            nombre = "Yamila Cafrune"
+            partido = prime
+            agregarPromesa("Que vuelva Futbol para Todos")
+            agregarPromesa("Estatizar las empresas privadas")
+            agregarPromesa("Pesificar la economia")
         }
 
-        this.createCandidate(sosa)
-        this.createCandidate(benitez)
-        this.createCandidate(yapura)
-        this.createCandidate(ramos)
-        this.createCandidate(monti)
-        this.createCandidate(rota)
-        this.createCandidate(cafrune)
+        this.crearCandidate(sosa)
+        this.crearCandidate(benitez)
+        this.crearCandidate(yapura)
+        this.crearCandidate(ramos)
+        this.crearCandidate(monti)
+        this.crearCandidate(rota)
+        this.crearCandidate(cafrune)
     }
 
-    fun createCandidate(candidate: Candidate) {
-        val existingCandidate = candidateRepository.findByName(candidate.name)
-        if (existingCandidate.isPresent()) {
-            candidate.id = existingCandidate.get().id
+    fun crearCandidate(candidate: Candidate) {
+        val candidateRepo = repoCandidates.findByNombre(candidate.nombre)
+        if (candidateRepo.isPresent()) {
+            candidate.id = candidateRepo.get().id
         } else {
-            candidateRepository.save(candidate)
-            println("Candidate ${candidate.name} created")
+            repoCandidates.save(candidate)
+            println("Candidate ${candidate.nombre} creade")
         }
     }
 
-    fun initZones() {
-        nacional = Zone().apply {
-            name = "Elecciones nacionales"
+    fun initZonas() {
+        nacional = Zona().apply {
+            descripcion = "Elecciones nacionales"
             candidates = hashSetOf(sosa, benitez, ramos, rota)
         }
-        springfield = Zone().apply {
-            name = "Springfield"
+        springfield = Zona().apply {
+            descripcion = "Springfield"
             candidates = hashSetOf(yapura, monti, cafrune)
         }
-        this.createZone(nacional)
-        this.createZone(springfield)
+        this.crearZona(nacional)
+        this.crearZona(springfield)
     }
 
-    fun createZone(zone: Zone) {
-        val existingZones = zoneRepository.findByName(zone.name)
-        if (existingZones.isEmpty()) {
-            zoneRepository.save(zone)
-            println("Zone ${zone.name} created")
+    fun crearZona(zona: Zona) {
+        val listaZonas = repoZonas.findByDescripcion(zona.descripcion)
+        if (listaZonas.isEmpty()) {
+            repoZonas.save(zona)
+            println("Zona ${zona.descripcion} creada")
         }
     }
 
@@ -164,9 +164,9 @@ class PoliticsBootstrap : InitializingBean {
         println("************************************************************************")
         println("Running initialization")
         println("************************************************************************")
-        this.initParties()
-        this.initCandidates()
-        this.initZones()
+        this.initPartidos()
+        this.initCandidatos()
+        this.initZonas()
         println("------------------------------------------------------------------------")
     }
 

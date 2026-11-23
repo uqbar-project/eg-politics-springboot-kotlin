@@ -16,19 +16,19 @@ class CandidateService {
 
     fun getCandidate(id: Long): Candidate =
         candidateRepository.findById(id).orElseThrow {
-            ResponseStatusException(HttpStatus.NOT_FOUND, "Candidate with id $id not found")
+            ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador $id no existe")
         }
 
     // https://stackoverflow.com/questions/7125837/why-does-transaction-roll-back-on-runtimeexception-but-not-sqlexception
     @Transactional(rollbackFor = [Exception::class])
-    fun updateCandidate(updatedCandidate: Candidate, id: Long): Candidate {
+    fun actualizarCandidate(candidateNuevo: Candidate, id: Long): Candidate {
         return candidateRepository
             .findById(id)
             .map { candidate ->
                 // solo modificamos lo que está disponible para cambiar en la aplicación
-                candidate.updatePromises(updatedCandidate.promises)
-                if (updatedCandidate.votes > 0) {
-                    candidate.votes = updatedCandidate.votes
+                candidate.actualizarPromesas(candidateNuevo.promesas)
+                if (candidateNuevo.votos > 0) {
+                    candidate.votos = candidateNuevo.votos
                 }
                 // el save no es obligatorio si utilizamos la anotación
                 // candidateRepository.save(candidate)
@@ -40,7 +40,7 @@ class CandidateService {
                 candidate
             }
             .orElseThrow {
-                ResponseStatusException(HttpStatus.NOT_FOUND, "Candidate with id $id not found")
+                ResponseStatusException(HttpStatus.NOT_FOUND, "El candidato con identificador $id no existe")
             }
 
     }

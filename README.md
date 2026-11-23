@@ -57,7 +57,7 @@ Podés ver la implementación de varios casos de prueba:
     - si buscamos una zona inexistente debe devolver código de http 404
 - para el controller de candidates
     - si actualizamos un candidate mediante un PUT eso se refleja en la base de datos. Dado que tiene efecto colateral **debemos utilizar la anotación @Transactional para este test**. Si bien utilizamos una base de datos in-memory y podríamos pensar "los cambios realmente no persisten", sí lo hacen en el contexto de los tests. Es decir, si repetimos el mismo test sin revertir el cambio, el primer test pasará correctamente **y el segundo fallará cuando espere que nuestro candidate tenga 0 votos**.
-  
+
 ## Cómo testear la app
 
 Podés descargarte la colección de endpoints en formato json para luego importarlo en alguno de estos clientes

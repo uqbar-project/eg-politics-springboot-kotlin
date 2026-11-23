@@ -8,68 +8,68 @@ import org.uqbar.politics.domain.exceptions.UserException
 class CandidateTest {
 
     @Test
-    fun `un candidate sin name no pasa la validacion`() {
-        assertThrows<UserException> { Candidate().validate() }
+    fun `un candidate sin nombre no pasa la validacion`() {
+        assertThrows<UserException> { Candidate().validar() }
     }
 
     @Test
-    fun `candidate without party fails validation`() {
-        assertThrows<UserException> { Candidate().apply { name = "Pierino Fantaguzzi" }.validate() }
+    fun `un candidate sin partido no pasa la validacion`() {
+        assertThrows<UserException> { Candidate().apply { nombre = "Pierino Fantaguzzi" }.validar() }
     }
 
     @Test
-    fun `candidate with valid data passes validation`() {
-        validCandidate().validate()
+    fun `un candidate con datos correctos pasa la validacion`() {
+        candidateOk().validar()
     }
 
     @Test
-    fun `candidate increments votes when voted`() {
-        val candidate = validCandidate()
-        val previousVotes = candidate.votes
-        candidate.vote()
-        Assertions.assertEquals(previousVotes + 1, candidate.votes)
+    fun `un candidate cuando es votado incrementa sus votos`() {
+        val candidate = candidateOk()
+        val votosAnteriores = candidate.votos
+        candidate.votar()
+        Assertions.assertEquals(votosAnteriores + 1, candidate.votos)
     }
 
     @Test
-    fun `candidate can add promises`() {
-        val candidate = validCandidate()
-        val previousPromisesCount = candidate.promises.size
-        candidate.addPromise("Promocionar a todes les alumnes")
-        Assertions.assertEquals(previousPromisesCount + 1, candidate.promises.size)
+    fun `un candidate puede agregar promesas`() {
+        val candidate = candidateOk()
+        val promesasAnteriores = candidate.promesas.size
+        candidate.agregarPromesa("Promocionar a todes les alumnes")
+        Assertions.assertEquals(promesasAnteriores + 1, candidate.promesas.size)
     }
 
     @Test
-    fun `updating candidate promises replaces previous promises`() {
-        val candidate = validCandidate()
-        candidate.addPromise("Promocionar a todes les alumnes")
-        candidate.updatePromises(listOf(Promise("Terminar con las clases presenciales"), Promise("Evitar exámenes capciosos")))
-        Assertions.assertEquals(2, candidate.promises.size)
+    fun `al actualizar promesas de une candidate se blanquean las anteriores`() {
+        val candidate = candidateOk()
+        candidate.agregarPromesa("Promocionar a todes les alumnes")
+        candidate.actualizarPromesas(listOf(Promesa("Terminar con las clases presenciales"), Promesa("Evitar exámenes capciosos")))
+        Assertions.assertEquals(2, candidate.promesas.size)
     }
 
     @Test
-    fun `reset clears candidate promises`() {
-        val candidate = validCandidate()
-        candidate.addPromise("Promocionar a todes les alumnes")
+    fun `al resetear se blanquean promesas de une candidate`() {
+        val candidate = candidateOk()
+        candidate.agregarPromesa("Promocionar a todes les alumnes")
         candidate.reset()
-        Assertions.assertEquals(0, candidate.promises.size)
+        Assertions.assertEquals(0, candidate.promesas.size)
     }
 
     @Test
-    fun `reset clears candidate opinions`() {
-        val candidate = validCandidate()
-        candidate.addOpinion("Parece gracioso")
+    fun `al resetear se blanquean opiniones de une candidate`() {
+        val candidate = candidateOk()
+        candidate.agregarOpinion("Parece gracioso")
         candidate.reset()
-        Assertions.assertEquals(0, candidate.opinions.size)
+        Assertions.assertEquals(0, candidate.opiniones.size)
     }
 
     @Test
-    fun `el toString de candidate es su name`() {
-        val candidate = validCandidate()
-        Assertions.assertEquals(candidate.name, candidate.toString())
+    fun `el toString de candidate es su nombre`() {
+        val candidate = candidateOk()
+        Assertions.assertEquals(candidate.nombre, candidate.toString())
     }
 }
 
-fun validCandidate() = Candidate().apply {
-    name = "Pierino Fantaguzzi"
-    party = PeronistParty()
+fun candidateOk() = Candidate().apply {
+    nombre = "Pierino Fantaguzzi"
+    partido = Peronista()
 }

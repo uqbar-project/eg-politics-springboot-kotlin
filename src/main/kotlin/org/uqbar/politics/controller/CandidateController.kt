@@ -16,7 +16,7 @@ class CandidateController {
         candidateService.getCandidate(id)
 
     @PatchMapping("/candidates/{id}")
-    fun updateCandidate(@RequestBody updatedCandidate: Candidate, @PathVariable id: Long): Candidate =
-        candidateService.updateCandidate(updatedCandidate, id)
+    fun actualizarCandidate(@RequestBody candidateNuevo: Candidate, @PathVariable id: Long): Candidate =
+        candidateService.actualizarCandidate(candidateNuevo, id)
 
 }
