@@ -1,6 +1,5 @@
 package org.uqbar.politics.service
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -9,10 +8,9 @@ import org.uqbar.politics.domain.Candidate
 import org.uqbar.politics.repository.CandidateRepository
 
 @Service
-class CandidateService {
-
-    @Autowired
-    lateinit var candidateRepository: CandidateRepository
+class CandidateService(
+    private val candidateRepository: CandidateRepository
+) {
 
     fun getCandidate(id: Long): Candidate =
         candidateRepository.findById(id).orElseThrow {

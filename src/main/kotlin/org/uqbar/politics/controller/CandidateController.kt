@@ -1,15 +1,13 @@
 package org.uqbar.politics.controller
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.uqbar.politics.domain.Candidate
 import org.uqbar.politics.service.CandidateService
 
 @RestController
-class CandidateController {
-
-    @Autowired
-    private lateinit var candidateService: CandidateService
+class CandidateController(
+    private val candidateService: CandidateService
+) {
 
     @GetMapping("/candidates/{id}")
     fun getCandidate(@PathVariable id: Long) =

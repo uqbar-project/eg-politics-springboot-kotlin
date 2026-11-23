@@ -2,7 +2,6 @@ package org.uqbar.politics
 
 import java.time.LocalDate
 import org.springframework.beans.factory.InitializingBean
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.uqbar.politics.domain.*
 import org.uqbar.politics.repository.CandidateRepository
@@ -15,16 +14,11 @@ import org.uqbar.politics.repository.ZonaRepository
  * https://stackoverflow.com/questions/38040572/spring-boot-loading-initial-data
  */
 @Service
-class PoliticsBootstrap : InitializingBean {
-
-    @Autowired
-    private lateinit var repoZonas: ZonaRepository
-
-    @Autowired
-    private lateinit var repoPartidos: PartidoRepository
-
-    @Autowired
-    private lateinit var repoCandidates: CandidateRepository
+class PoliticsBootstrap(
+    private val repoZonas: ZonaRepository,
+    private val repoPartidos: PartidoRepository,
+    private val repoCandidates: CandidateRepository
+) : InitializingBean {
 
     private lateinit var frejuli: Peronista
     private lateinit var perone: Peronista

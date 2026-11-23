@@ -1,7 +1,6 @@
 package org.uqbar.politics.controller
 
 import com.fasterxml.jackson.annotation.JsonView
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.uqbar.politics.domain.Zona
 import org.uqbar.politics.serializers.View
@@ -9,10 +8,9 @@ import org.uqbar.politics.service.ZonaService
 
 @RestController
 @RequestMapping("/zonas")
-class ZonaController {
-
-    @Autowired
-    private lateinit var zonaService: ZonaService
+class ZonaController(
+    private val zonaService: ZonaService
+) {
 
     @GetMapping("")
     @JsonView(View.Zona.Plana::class)
